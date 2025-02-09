@@ -1,6 +1,6 @@
 package Store;
 
-public class TotalPrice {
+public class PaymentManager {
     private int totalPrice;
     private int currentPrice;
 
@@ -10,6 +10,10 @@ public class TotalPrice {
 
     public int getCurrentPrice() {
         return currentPrice;
+    }
+
+    public void setCurrentPrice(int currentPrice){
+        this.currentPrice=currentPrice;
     }
 
     public void resetCurrentPrice() {
@@ -22,8 +26,7 @@ public class TotalPrice {
     }
 
     public int multiply(int order_count, double discountRate) {
-        totalPrice += currentPrice * (1 - discountRate) * order_count;
+        totalPrice += currentPrice * order_count;
         return totalPrice;
     }
-
 }
