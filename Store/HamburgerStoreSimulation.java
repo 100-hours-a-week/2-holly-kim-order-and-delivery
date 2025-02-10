@@ -1,10 +1,7 @@
 package Store;
 
 import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HamburgerStoreSimulation {
@@ -13,8 +10,8 @@ public class HamburgerStoreSimulation {
         LinkedBlockingQueue<String> orderQueue = new LinkedBlockingQueue<>();
         LinkedBlockingQueue<String> deliveryQueue = new LinkedBlockingQueue<>();
         AtomicBoolean shutdownFlag = new AtomicBoolean(false);
-
         OrderManager storeOrder = new OrderManager();
+
         storeOrder.welcome();
         Scanner scanner = storeOrder.getScanner();
         boolean ordering = true;
@@ -30,8 +27,6 @@ public class HamburgerStoreSimulation {
             if (answer.equalsIgnoreCase("n")) {
                 ordering = false;
                 System.out.println("주문을 종료합니다. 계산을 진행하겠습니다.");
-                orderQueue=storeOrder.getOrderQueue();
-                System.out.println("orderQueue = " + orderQueue);
                 System.out.println("--------------------------------------------------------------------------");
             } else if (answer.equalsIgnoreCase("y")) {
                 System.out.println("현재 상품이 장바구니에 담겼습니다.");
@@ -43,22 +38,39 @@ public class HamburgerStoreSimulation {
         storeOrder.pay();
         storeOrder.closeScanner();
 
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+        ExecutorService executor = Executors.newFixedThreadPool(4);
+
+        orderQueue=storeOrder.getOrderQueue();
+        System.out.println("orderQueue = " + orderQueue);
+        int totalOrders = orderQueue.size();
+        System.out.println("totalOrders = " + totalOrders);
+        CountDownLatch latch = new CountDownLatch(totalOrders); // 주문 개수 추적을 위한 CountDownLatch
+
         TimeManager timeJob = new TimeManager(shutdownFlag);
-        CookManager cookJob = new CookManager(orderQueue, deliveryQueue, shutdownFlag);
-        ServeManager serveJob = new ServeManager(orderQueue, deliveryQueue, shutdownFlag);
+        CookManager cookJob1 = new CookManager(orderQueue, deliveryQueue, shutdownFlag);
+        CookManager cookJob2 = new CookManager(orderQueue, deliveryQueue, shutdownFlag);
+        ServeManager serveJob = new ServeManager(orderQueue, deliveryQueue, shutdownFlag, latch);
 
         executor.execute(timeJob);
-        executor.execute(cookJob);
+        executor.execute(cookJob1);
+        executor.execute(cookJob2);
         executor.execute(serveJob);
 
+        // 모든 주문이 서빙될 때까지 대기
+        try {
+            latch.await();
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("모든 주문이 서빙되었습니다.");
+        shutdownFlag.set(true);
         executor.shutdown();
         try {
             boolean finished=executor.awaitTermination(3, TimeUnit.MINUTES);
             if (!finished) {
                 System.out.println("모든 작업이 끝나지 않았지만 타임아웃이 발생했습니다.");
             }
-            System.out.println("Finished? " + finished);
             System.out.println("================== Thank you for visiting McDonald's =====================");
         } catch (InterruptedException e){
             e.printStackTrace();

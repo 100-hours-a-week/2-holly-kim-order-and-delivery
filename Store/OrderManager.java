@@ -223,20 +223,20 @@ public class OrderManager {
     }
 
     public void pay() {
-        // 모든 주문 상품의 가격과 수량 출력
+        // 주문 확인: 모든 주문 상품의 금액과 수량 출력
         int count = 0;
         for (Order order : orderList) {
             System.out.println("🟥주문 " + ++count);
             for (Item item : order.getItems()) {
                 System.out.println(String.format("%s (%,d won)", item, item.getPrice()));
             }
-            // 금액과 개수
+            // 계산 금액과 개수
             System.out.println(String.format("금액: %,d won",order.getPerPrice()));
             System.out.println("총 " + order.getQuantity() + "개");
             System.out.println(String.format("총 금액: %,d won", order.getTotalPrice()));
         }
 
-
+        // 총 금액 계산
         int remainingAmount = payment.getTotalPrice();
         System.out.printf("🟩지불해야 할 총 금액은 %,d won 입니다.%n", remainingAmount);
 
