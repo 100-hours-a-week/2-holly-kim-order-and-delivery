@@ -4,25 +4,8 @@ thread로 시간의 흐름도 구현
 
 
 ### 실행 예시  
+(https://www.youtube.com/shorts/fsMpz8w6Huk)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fsMpz8w6Huk" frameborder="0" allowfullscreen></iframe>
-
-<iframe width="315" height="560" 
-src="https://www.youtube.com/embed/QPOLrbKI5oQ" 
-title="YouTube video player" frameborder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-gyroscope; picture-in-picture;
-web-share"
-allowfullscreen></iframe>
-
-
-<iframe width="315" height="560" 
-src="https://www.youtube.com/embed/QPOLrbKI5oQ" 
-title="YouTube video player" frameborder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-gyroscope; picture-in-picture;
-web-share"
-allowfullscreen></iframe>
 
 
 ### 1주차 과제와 달라진 점
