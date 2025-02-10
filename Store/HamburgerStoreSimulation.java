@@ -49,7 +49,7 @@ public class HamburgerStoreSimulation {
         TimeManager timeJob = new TimeManager(shutdownFlag);
         CookManager cookJob1 = new CookManager(orderQueue, deliveryQueue, shutdownFlag);
         CookManager cookJob2 = new CookManager(orderQueue, deliveryQueue, shutdownFlag);
-        ServeManager serveJob = new ServeManager(orderQueue, deliveryQueue, shutdownFlag, latch);
+        ServeManager serveJob = new ServeManager(deliveryQueue, shutdownFlag, latch);
 
         executor.execute(timeJob);
         executor.execute(cookJob1);

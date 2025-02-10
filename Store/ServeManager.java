@@ -4,15 +4,13 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ServeManager implements Runnable {
-    private LinkedBlockingQueue<String> orderQueue;
+public class ServeManager implements Runnable { 
     private LinkedBlockingQueue<String> deliveryQueue;
     private AtomicBoolean shutdownFlag;
     private CountDownLatch latch;
 
-    public ServeManager(LinkedBlockingQueue<String> orderQueue, LinkedBlockingQueue<String> deliveryQueue, AtomicBoolean shutdownFlag, CountDownLatch latch) {
-        this.deliveryQueue = deliveryQueue;
-        this.orderQueue = orderQueue;
+    public ServeManager(LinkedBlockingQueue<String> deliveryQueue, AtomicBoolean shutdownFlag, CountDownLatch latch) {
+        this.deliveryQueue = deliveryQueue; 
         this.shutdownFlag = shutdownFlag;
         this.latch=latch;
     }
