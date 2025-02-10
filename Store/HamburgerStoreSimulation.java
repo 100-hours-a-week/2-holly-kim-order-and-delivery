@@ -71,10 +71,12 @@ public class HamburgerStoreSimulation {
             if (!finished) {
                 System.out.println("모든 작업이 끝나지 않았지만 타임아웃이 발생했습니다.");
             }
-            System.out.println("================== Thank you for visiting McDonald's =====================");
+            
         } catch (InterruptedException e){
             e.printStackTrace();
         }
+        storeOrder.closeScanner();
+        System.out.println("================== Thank you for visiting McDonald's =====================");
         executor.shutdownNow();
     }
 }
