@@ -47,6 +47,6 @@ thread를 사용하여 기존의 주문 서비스에서 요리, 서빙, 시간�
 - 스레드 풀도 마지막에 잘 닫아주었다.
 - AtomicBoolean shutdownFlag = new AtomicBoolean(false)로 초기화했다. AtomicBoolean을 사용하면 타입을 boolean으로 할 때와 다르게 가시성 문제가 발생하지 않는다. 다른 쓰레드에서 `shutdownFlag.set(true);` 하면 이 변경 사항이 즉시 반영된다. (참고로 타입이`boolean` 이면 단순한 변수이므로 CPU 캐시에 머물러 최신 값이 반영되지 않는다.) volatile을 사용해도 가시성 문제가 발생하지 않을 것이다.
 
-### 다형성
+### 객체 지향-책임 분리
 
 Order 내에서 계산을 하도록 할 수도 있으나 계산은 PaymentManager에서 처리하게 했다.
