@@ -1,6 +1,6 @@
-package Store;
+package store.service;
 
-public class PaymentManager {
+public class PaymentService {
     private int totalPrice;
     private int currentPrice;
 

@@ -1,4 +1,4 @@
-package Store;
+package store.core;
 
 public abstract class Item {
     String name;

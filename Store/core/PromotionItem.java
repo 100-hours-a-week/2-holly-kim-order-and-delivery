@@ -1,14 +1,14 @@
-package Store;
+package store.core;
 
 public class PromotionItem extends MainItem {
     private double promotionRate = 0.1;
 
-    PromotionItem(String name, int price, double promotionRate) {
+    public PromotionItem(String name, int price, double promotionRate) {
         super(name, price);
         this.promotionRate = promotionRate;
     }
 
-    PromotionItem(String name, int price) {
+    public PromotionItem(String name, int price) {
         super(name, price);
     }
 

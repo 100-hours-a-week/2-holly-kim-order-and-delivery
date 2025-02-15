@@ -1,4 +1,4 @@
-package Store;
+package store.core;
 
 public class AdditionalItem extends Item {
     public AdditionalItem(String name, int price) {

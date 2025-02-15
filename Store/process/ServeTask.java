@@ -1,16 +1,18 @@
-package Store;
+package store.process;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ServeManager implements Runnable { 
+public class ServeTask implements Runnable {
+    private LinkedBlockingQueue<String> orderQueue;
     private LinkedBlockingQueue<String> deliveryQueue;
     private AtomicBoolean shutdownFlag;
     private CountDownLatch latch;
 
-    public ServeManager(LinkedBlockingQueue<String> deliveryQueue, AtomicBoolean shutdownFlag, CountDownLatch latch) {
-        this.deliveryQueue = deliveryQueue; 
+    public ServeTask(LinkedBlockingQueue<String> orderQueue, LinkedBlockingQueue<String> deliveryQueue, AtomicBoolean shutdownFlag, CountDownLatch latch) {
+        this.deliveryQueue = deliveryQueue;
+        this.orderQueue = orderQueue;
         this.shutdownFlag = shutdownFlag;
         this.latch=latch;
     }

@@ -1,4 +1,6 @@
-package Store;
+package store.service;
+
+import store.core.*;
 
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -6,9 +8,9 @@ import java.util.stream.IntStream;
 // import java.util.Optional;
 
 
-public class OrderManager {
+public class OrderService {
     private final Scanner scanner = new Scanner(System.in);
-    private final PaymentManager payment = new PaymentManager();
+    private final PaymentService payment = new PaymentService();
     private List<Order> orderList = new ArrayList<>(); // 모든 주문을 저장할 리스트
     private List<Item> currentItemList = new ArrayList<>(); // 현재 주문의 아이템을 저장하는 리스트
     private LinkedBlockingQueue<String> orderQueue = new LinkedBlockingQueue<>(); // 요리, 배달에 사용할 큐
@@ -34,10 +36,10 @@ public class OrderManager {
                 new PromotionItem("치즈할라피뇨쿼터파운드치즈", 6500),
                 new PromotionItem("독점공개신상버거", 7000, 0.2)
         ));
-        sideMenuList = List.of(
+        sideMenuList = new ArrayList<>(List.of(
                 new AdditionalItem("감자튀김 S", 0),
                 new AdditionalItem("감자튀김 L", 500)
-        );
+        ));
         drinkList = new ArrayList<>(List.of(
                 new AdditionalItem("콜라", 0),
                 new AdditionalItem("사이다", 0),

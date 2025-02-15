@@ -1,4 +1,4 @@
-package Store;
+package store.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +18,7 @@ public class Order {
 
     private int calculateTotalPrice() {
         return perPrice*quantity;
-//        return (int)(items.stream()
-//                            .mapToInt(Item::getPrice)
-//                            .sum() * (1-discountRate)* quantity
-//                    );
-    }
+   }
 
     public List<Item> getItems() {
         return items;
@@ -34,10 +30,6 @@ public class Order {
 
     public int getPerPrice() {
         return perPrice;
-//        return (int)(items.stream()
-//                .mapToInt(Item::getPrice)
-//                .sum() * (1-discountRate)
-//        );
     }
 
     public int getQuantity() {

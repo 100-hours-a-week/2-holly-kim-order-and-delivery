@@ -1,12 +1,12 @@
-package Store;
+package store.process;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-class TimeManager implements Runnable{
+public class TimeTask implements Runnable{
     private int time = 0;
     private AtomicBoolean shutdownFlag;
 
-    public TimeManager(AtomicBoolean shutdownFlag) {
+    public TimeTask(AtomicBoolean shutdownFlag) {
         this.shutdownFlag=shutdownFlag;
     }
 

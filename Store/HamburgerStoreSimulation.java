@@ -1,4 +1,9 @@
-package Store;
+package store;
+
+import store.process.CookTask;
+import store.service.OrderService;
+import store.process.ServeTask;
+import store.process.TimeTask;
 
 import java.util.Scanner;
 import java.util.concurrent.*;
@@ -10,7 +15,7 @@ public class HamburgerStoreSimulation {
         LinkedBlockingQueue<String> orderQueue = new LinkedBlockingQueue<>();
         LinkedBlockingQueue<String> deliveryQueue = new LinkedBlockingQueue<>();
         AtomicBoolean shutdownFlag = new AtomicBoolean(false);
-        OrderManager storeOrder = new OrderManager();
+        OrderService storeOrder = new OrderService();
 
         storeOrder.welcome();
         Scanner scanner = storeOrder.getScanner();
@@ -46,10 +51,10 @@ public class HamburgerStoreSimulation {
         System.out.println("totalOrders = " + totalOrders);
         CountDownLatch latch = new CountDownLatch(totalOrders); // 주문 개수 추적을 위한 CountDownLatch
 
-        TimeManager timeJob = new TimeManager(shutdownFlag);
-        CookManager cookJob1 = new CookManager(orderQueue, deliveryQueue, shutdownFlag);
-        CookManager cookJob2 = new CookManager(orderQueue, deliveryQueue, shutdownFlag);
-        ServeManager serveJob = new ServeManager(deliveryQueue, shutdownFlag, latch);
+        TimeTask timeJob = new TimeTask(shutdownFlag);
+        CookTask cookJob1 = new CookTask(orderQueue, deliveryQueue, shutdownFlag);
+        CookTask cookJob2 = new CookTask(orderQueue, deliveryQueue, shutdownFlag);
+        ServeTask serveJob = new ServeTask(orderQueue, deliveryQueue, shutdownFlag, latch);
 
         executor.execute(timeJob);
         executor.execute(cookJob1);

@@ -1,14 +1,14 @@
-package Store;
+package store.process;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class CookManager implements Runnable {
+public class CookTask implements Runnable {
     private LinkedBlockingQueue<String> orderQueue;
     private LinkedBlockingQueue<String> deliveryQueue;
     private AtomicBoolean shutdownFlag;
 
-    public CookManager(LinkedBlockingQueue<String> orderQueue, LinkedBlockingQueue<String> deliveryQueue, AtomicBoolean shutdownFlag) {
+    public CookTask(LinkedBlockingQueue<String> orderQueue, LinkedBlockingQueue<String> deliveryQueue, AtomicBoolean shutdownFlag) {
         this.orderQueue = orderQueue;
         this.deliveryQueue = deliveryQueue;
         this.shutdownFlag = shutdownFlag;

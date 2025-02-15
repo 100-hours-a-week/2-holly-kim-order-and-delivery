@@ -1,6 +1,6 @@
-package Store;
+package store.core;
 
-public class MainItem extends Item{
+public class MainItem extends Item {
 
     public MainItem(String name, int price){
         super(name, price);
