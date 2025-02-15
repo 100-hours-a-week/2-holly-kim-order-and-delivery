@@ -5,7 +5,6 @@ import store.core.*;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.IntStream;
-// import java.util.Optional;
 
 
 public class OrderService {
@@ -191,6 +190,7 @@ public class OrderService {
         }
 
         int originalPrice = payment.getCurrentPrice();
+
         if (discountRate != 0) { // 할인이 적용된 프로모션 상품의 경우
             int discountPrice = (int) (originalPrice * (1 - discountRate));
             payment.setCurrentPrice(discountPrice);
@@ -218,6 +218,10 @@ public class OrderService {
             }
         }
 
+        // currentItemList의 Item들의 할인율 설정
+        for (Item i:currentItemList){
+            i.setPromotionRate(discountRate);
+        }
         // 모든 주문을 저장하는 리스트에 현재 주문을 추가
         Order currentOrder = new Order(currentItemList, quantity, payment.getCurrentPrice());
         orderList.add(currentOrder);

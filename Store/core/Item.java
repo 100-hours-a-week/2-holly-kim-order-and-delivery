@@ -4,6 +4,7 @@ public abstract class Item {
     String name;
     int price;
     int id;
+    double promotionRate = 0;
 
     public void setId(int id) {
         this.id = id;
@@ -11,6 +12,14 @@ public abstract class Item {
 
     public String getName() {
         return name;
+    }
+
+    public void setPromotionRate(double promotionRate) {
+        this.promotionRate = promotionRate;
+    }
+
+    public double getPromotionRate() {
+        return promotionRate;
     }
 
     public int getPrice() {

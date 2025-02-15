@@ -1,7 +1,6 @@
 package store.core;
 
 public class PromotionItem extends MainItem {
-    private double promotionRate = 0.1;
 
     public PromotionItem(String name, int price, double promotionRate) {
         super(name, price);
@@ -10,10 +9,7 @@ public class PromotionItem extends MainItem {
 
     public PromotionItem(String name, int price) {
         super(name, price);
-    }
-
-    public double getPromotionRate() {
-        return promotionRate;
+        this.promotionRate=0.1;
     }
 
     public void displayMenu() {

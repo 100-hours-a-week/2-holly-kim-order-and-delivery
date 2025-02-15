@@ -54,12 +54,14 @@ public class HamburgerStoreSimulation {
         TimeTask timeJob = new TimeTask(shutdownFlag);
         CookTask cookJob1 = new CookTask(orderQueue, deliveryQueue, shutdownFlag);
         CookTask cookJob2 = new CookTask(orderQueue, deliveryQueue, shutdownFlag);
-        ServeTask serveJob = new ServeTask(orderQueue, deliveryQueue, shutdownFlag, latch);
+        ServeTask serveJob = new ServeTask(deliveryQueue, shutdownFlag, latch);
 
-        executor.execute(timeJob);
-        executor.execute(cookJob1);
-        executor.execute(cookJob2);
-        executor.execute(serveJob);
+        executor.execute(new TimeTask(shutdownFlag));
+        // 요리는 오래걸리므로 2개의 스레드에서 실행
+        for (int i = 0; i < 2; i++) {
+            executor.execute(new CookTask(orderQueue, deliveryQueue, shutdownFlag));
+        }
+        executor.execute(new ServeTask(deliveryQueue, shutdownFlag, latch));
 
         // 모든 주문이 서빙될 때까지 대기
         try {

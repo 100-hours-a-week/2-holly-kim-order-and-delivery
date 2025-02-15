@@ -10,9 +10,8 @@ public class ServeTask implements Runnable {
     private AtomicBoolean shutdownFlag;
     private CountDownLatch latch;
 
-    public ServeTask(LinkedBlockingQueue<String> orderQueue, LinkedBlockingQueue<String> deliveryQueue, AtomicBoolean shutdownFlag, CountDownLatch latch) {
+    public ServeTask(LinkedBlockingQueue<String> deliveryQueue, AtomicBoolean shutdownFlag, CountDownLatch latch) {
         this.deliveryQueue = deliveryQueue;
-        this.orderQueue = orderQueue;
         this.shutdownFlag = shutdownFlag;
         this.latch=latch;
     }
